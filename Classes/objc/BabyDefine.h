@@ -66,9 +66,13 @@
 # pragma mark - baby 定义的方法
 
 //Baby log
-#define BabyLog(fmt, ...) if(KBABY_IS_SHOW_LOG) { NSLog(fmt,##__VA_ARGS__); }
+//#define BabyLog(fmt, ...) if(KBABY_IS_SHOW_LOG) { NSLog(fmt,##__VA_ARGS__); }
 
-
+#if DEBUG
+#define BabyLog(FORMAT, ...) fprintf(stderr,"\%s [第%d行] %s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#else
+#define BabyLog(FORMAT, ...)
+#endif
 
 
 
